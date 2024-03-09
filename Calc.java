@@ -4,10 +4,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Calc {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Input:");
-        String strInput = input.nextLine();
+        String strInput = "";
+        //запросить выражение
+        while (strInput != "Q"){
+            System.out.println("Input (Q=quit):");
+            strInput = input.nextLine();
+            if (strInput == "Q"){
+                System.exit(0);
+            }
+            //выдать результат
+            System.out.println("Output: " + calc(strInput));
+        }
+    }
+    public static String calc(String strInput){
         String sinput = "";
         String strOutput = "";
         String ca = "";
@@ -105,7 +116,7 @@ public class Calc {
         //если были римские, перевести в них. если меньше 1- вывалиться.
         if (ar) {
             if (result<1) {
-                System.out.println("У римлян меньше I не бывает!!!");
+                System.out.println("У римлян меньше I не бывает!");
                 System.exit(0);
             } else if (result<11) {
                 strOutput = rimnum[result-1];
@@ -146,8 +157,6 @@ public class Calc {
         } else {
             strOutput = Integer.toString(result);
         }
-
-        //выдать результат
-        System.out.println("Output: "+strOutput);
+        return strOutput;
     }
 }
