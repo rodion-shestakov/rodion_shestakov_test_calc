@@ -57,7 +57,7 @@ public class Calc {
             br=true;
         }
         if (ar != br){
-            System.out.println("Римляне с Арабами не складывают свои числа в одну корзину!");
+            System.out.println("Римляне с Арабами не складывают свои числа в одну корзину! ");
             System.exit(0);
         }
 
