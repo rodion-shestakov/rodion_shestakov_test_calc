@@ -1,24 +1,34 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Calc {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String strInput = "";
         //запросить выражение
-        while (strInput != "Q"){
+        while (!strInput.equals("Q")){
             System.out.println("Input (Q=quit):");
             strInput = input.nextLine();
-            if (strInput == "Q"){
+            if (Objects.equals(strInput, "Q")){
                 System.exit(0);
             }
             //выдать результат
             System.out.println("Output: " + calc(strInput));
         }
     }
-    public static String calc(String strInput){
+
+    public static void validateInput(String input) throws InvalidInputException {
+        if (input == null || input.isEmpty()) {
+            throw new InvalidInputException("С пустотой не работаю.");
+        }
+        if (!input.contains("+") && !input.contains("-") && !input.contains("*") && !input.contains("/")) {
+            throw new InvalidInputException("Задача не определена. Не вижу необходимого для вычисления действия.");
+        }
+        if (input.contains(".") || input.contains(",")) {
+            throw new InvalidInputException("Дроби я еще не проходил.");
+        }
+    }
+
+    public static String calc(String strInput) {
         String sinput = "";
         String strOutput = "";
         String ca = "";
@@ -32,6 +42,12 @@ public class Calc {
         int result = 0;
         int rrr;
 
+        // проверка на пустой ввод и есть ли действие
+        try {
+            validateInput(strInput);
+        } catch (InvalidInputException e) {
+            System.out.println("Invalid input: " + e.getMessage());
+        }
 
         // очистить ввод от пробелов
         for(int i=0; i< strInput.length();i++){
@@ -61,11 +77,6 @@ public class Calc {
             System.exit(0);
         }
 
-        // проверка на целое число
-        if (ca.contains(",") || ca.contains(".") || cb.contains(",") || cb.contains(".")){
-            System.out.println("Дроби я еще не изучал :-(");
-            System.exit(0);
-        }
 
         // преобразовать в арабские
         if (ar){
