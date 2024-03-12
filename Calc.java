@@ -18,7 +18,7 @@ public class Calc {
 
     public static void validateInput(String input) throws InvalidInputException {
         if (input == null || input.isEmpty()) {
-            throw new InvalidInputException("С пустотой не работаю.");
+            throw new InvalidInputException("С пустотой не работаю. Я не Чапаев.");
         }
         if (!input.contains("+") && !input.contains("-") && !input.contains("*") && !input.contains("/")) {
             throw new InvalidInputException("Задача не определена. Не вижу необходимого для вычисления действия.");
